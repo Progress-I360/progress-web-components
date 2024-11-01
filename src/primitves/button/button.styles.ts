@@ -13,13 +13,6 @@ export default css`
   button.full-width {
     width: 100%;
   }
-  button span.label {
-    font-family: var(--font-family-Source-Sans-Pro);
-    font-size: var(--font-size-sm);
-    font-style: normal;
-    font-weight: var(--font-weight-semi-bold);
-    line-height: var(--font-line-height-sm);
-  }
   button span.icon {
     align-items: center;
     display: flex;

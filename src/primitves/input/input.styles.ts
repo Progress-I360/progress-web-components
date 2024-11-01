@@ -37,14 +37,6 @@ export default css`
     background: var(--color-background-disabled);
     border: 1px solid var(--color-border-input-disabled);
   }
-  label {
-    color: var(--color-text-subtle);
-    font-family: var(--font-family-Source-Sans-Pro);
-    font-size: var(--font-size-xs);
-    font-style: normal;
-    font-weight: var(--font-weight-semi-bold);
-    line-height: var(--font-line-height-sm);
-  }
   input {
     background: transparent;
     border: none;

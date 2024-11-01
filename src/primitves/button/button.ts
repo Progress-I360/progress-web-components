@@ -2,6 +2,7 @@ import { html, LitElement, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import style from "./button.styles";
+import "../body/body";
 import "../icon/icon";
 
 export type ButtonSize = "extra-small" | "medium" | "small";
@@ -75,7 +76,11 @@ export class Button extends LitElement {
             </slot>
             <slot>
               ${this.label
-                ? html`<span class="label">${this.label}</span>`
+                ? html`<pwc-body
+                    content="${this.label}"
+                    color="${this.getLabelColor()}"
+                    variant="${this.getLabelVariant()}"
+                  />`
                 : nothing}
             </slot>`}
     </button>`;
@@ -100,6 +105,18 @@ export class Button extends LitElement {
       default:
         return "inverse";
     }
+  }
+  private getLabelColor() {
+    switch (this.variant) {
+      case "clear":
+      case "ghost":
+        return "base";
+      default:
+        return "inverse";
+    }
+  }
+  private getLabelVariant() {
+    return this.size === "extra-small" ? "xs-semi-bold" : "sm-semi-bold";
   }
 }
 

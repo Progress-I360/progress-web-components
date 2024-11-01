@@ -2,6 +2,7 @@ import { html, LitElement, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import style from "./input.styles";
+import "../body/body";
 
 export type InputSize = "normal" | "small";
 export type InputType = "text" | "password" | "email" | "tel" | "url";
@@ -31,11 +32,16 @@ export class Input extends LitElement {
   protected render() {
     return html`
       <div class="outer">
-        <slot name="label"
-          >${this.label
-            ? html`<label for="input">${this.label}</label>`
-            : nothing}</slot
-        >
+        <slot name="label">
+          ${this.label
+            ? html`<label for="input"
+                ><pwc-body
+                  color="subtle"
+                  content="${this.label}"
+                  variant="xs-semi-bold"
+              /></label>`
+            : nothing}
+        </slot>
         <div class="${this.getDivClasses()}">
           <slot name="icon"></slot>
           <input
