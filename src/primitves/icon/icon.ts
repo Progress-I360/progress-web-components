@@ -21,10 +21,7 @@ export type IconWeight = "regular" | "solid";
 export class Icon extends LitElement {
   static styles = style;
 
-  @property()
-  duotone: boolean = false;
-
-  @property()
+  @property({ reflect: true })
   iconKey: string = "";
 
   @property()
@@ -41,27 +38,29 @@ export class Icon extends LitElement {
 
   protected render() {
     return html`
-      <link rel="stylesheet" href="./src/static/css/fontawesome.css" />
-      <div class=${this.getDivClasses()}>
-        <span class=${this.getSpanClasses()} />
+      <div class=${this.getOuterDivClasses()}>
+        <div
+          class=${this.getInnerDivClasses()}
+          style="mask-image:url(../src/static/images/${this.weight}/${this
+            .iconKey}.svg);-webkit-mask-image:url(../src/static/images/${this
+            .weight}/${this.iconKey}.svg);"
+        />
       </div>
     `;
   }
 
-  private getDivClasses() {
+  private getOuterDivClasses() {
     return classMap({
-      [`${this.size}`]: true,
+      outer: true,
+      [this.size]: true,
     });
   }
-  private getSpanClasses() {
+  private getInnerDivClasses() {
     return classMap({
-      ["fa-duotone"]: this.duotone,
-      [`fa-${this.iconKey}`]: true,
+      inner: true,
       [this.size]: true,
-      ["fa-spin"]: this.spin,
+      spin: this.spin,
       [this.variant]: true,
-      [this.weight]: true,
-      [`fa-${this.weight}`]: true,
     });
   }
 }

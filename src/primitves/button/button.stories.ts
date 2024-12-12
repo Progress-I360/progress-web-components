@@ -57,11 +57,6 @@ export default {
         "Text to display on button. For full control of the button contents, use the default slot.",
       type: { name: "string" },
     },
-    onClick: {
-      action: "clicked",
-      description: "Function to call on click.",
-      type: { name: "function" },
-    },
     size: {
       control: "select",
       options: ["extra-small", "medium", "small"],

@@ -11,16 +11,6 @@ export default {
     },
   },
   argTypes: {
-    duotone: {
-      control: "boolean",
-      description: "If set to true, icon will be two-toned.",
-      table: {
-        type: {
-          summary: "boolean",
-        },
-        defaultValue: { summary: "false" },
-      },
-    },
     iconKey: {
       control: "text",
       description: "Icon key from FontAwesome.",

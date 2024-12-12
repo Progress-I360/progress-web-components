@@ -1,21 +1,37 @@
-import { html, LitElement, nothing } from "lit";
+import { html, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import style from "./input.styles";
 import "../body/body";
-
-export type InputSize = "normal" | "small";
-export type InputType = "text" | "password" | "email" | "tel" | "url";
+import {
+  BrowserFeature,
+  Capitalization,
+  InputBase,
+  InputSize,
+  InputType,
+} from "../common/InputBase";
 
 @customElement("pwc-input")
-export class Input extends LitElement {
+export class Input extends InputBase {
   static styles = style;
 
   @property()
-  disabled: boolean | undefined;
+  autocapitalize: Capitalization = "none";
 
   @property()
-  label: string | undefined;
+  autocomplete: BrowserFeature | string = "on";
+
+  @property()
+  autocorrect: BrowserFeature = "on";
+
+  @property()
+  maxlength: number | undefined;
+
+  @property()
+  minlength: number | undefined;
+
+  @property()
+  pattern: string | undefined;
 
   @property()
   placeholder: string | undefined;
@@ -80,6 +96,7 @@ export class Input extends LitElement {
       target.value = this.value || "";
     } else {
       this.value = target.value;
+      //todo: dispatch input event
     }
   }
 }

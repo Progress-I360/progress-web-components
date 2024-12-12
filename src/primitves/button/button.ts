@@ -37,9 +37,6 @@ export class Button extends LitElement {
   label: string | undefined;
 
   @property()
-  onClick: (() => void) | undefined;
-
-  @property()
   size: ButtonSize = "medium";
 
   @property()
@@ -50,14 +47,13 @@ export class Button extends LitElement {
 
   protected render() {
     return html` <button
-      @click=${this.disabled || this.busy ? nothing : this.onClick}
+      @click=${this.handleClick}
       ${this.disabled ? "disabled" : nothing}
       class="${this.getClasses()}"
       type=${this.type}
     >
       ${this.busy
         ? html`<pwc-icon
-            duotone=${true}
             iconKey="spinner-third"
             size=${this.size}
             spin=${true}
@@ -107,6 +103,10 @@ export class Button extends LitElement {
     }
   }
   private getLabelColor() {
+    if (this.disabled) {
+      return "disabled";
+    }
+
     switch (this.variant) {
       case "clear":
       case "ghost":
@@ -117,6 +117,11 @@ export class Button extends LitElement {
   }
   private getLabelVariant() {
     return this.size === "extra-small" ? "xs-semi-bold" : "sm-semi-bold";
+  }
+  private handleClick() {
+    if (!this.disabled && !this.busy) {
+      this.dispatchEvent(new Event("click", { bubbles: true, composed: true }));
+    }
   }
 }
 
